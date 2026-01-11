@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDUSENSE - Your AI Learning Companion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="hamburger-menu" id="hamburgerMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <div class="logo">
+            <i class="fas fa-brain" style="color: #8A2BE2; font-size: 2rem;"></i>
+            <h1>EDUSENSE</h1>
+        </div>
+        
+        <div class="nav-right">
+            <div class="notification-icon" id="notificationIcon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-count">3</span>
+            </div>
+            <div class="user-avatar" id="userAvatar">
+                AJ
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar" id="sidebar">
+        <div class="user-info">
+            <div class="user-avatar" style="margin: 0 auto 15px; width: 70px; height: 70px; font-size: 1.5rem;">
+                AJ
+            </div>
+            <h3>Alex Johnson</h3>
+            <p class="user-tag">@StudyWarrior</p>
+            <p style="color: #32CD32; margin-top: 5px;">Level 15 • 2,450 XP</p>
+        </div>
+        
+        <ul class="menu-items">
+            <li><a href="#" data-page="profile"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#" data-page="scoreboard"><i class="fas fa-trophy"></i> Scoreboard</a></li>
+            <li><a href="#" data-page="badges"><i class="fas fa-shield-alt"></i> Badges</a></li>
+            <li><a href="#" data-page="friends"><i class="fas fa-users"></i> Friends <span class="menu-badge">3</span></a></li>
+            <li><a href="#" data-page="collaboration"><i class="fas fa-handshake"></i> Collaboration</a></li>
+            <li><a href="#" data-page="competitive"><i class="fas fa-gamepad"></i> Competitive</a></li>
+            <li><a href="#" data-page="league"><i class="fas fa-chess-knight"></i> League System</a></li>
+            <li><a href="#" data-page="mail"><i class="fas fa-envelope"></i> Mail <span class="menu-badge">5</span></a></li>
+            <li><a href="#" data-page="help"><i class="fas fa-question-circle"></i> Help</a></li>
+            <li><a href="#" data-page="about"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay for sidebar on mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content - All Pages -->
+    <main class="main-content" id="mainContent">
+        <!-- HOME PAGE (Default) -->
+        <div class="page active" id="home">
+            <div class="page-header">
+                <h2><i class="fas fa-home"></i> Home Dashboard</h2>
+                <p style="color: var(--text-gray); margin-top: 10px;">Welcome back, Alex! Ready to continue your learning journey?</p>
+            </div>
+
+            <!-- AI Chat Section -->
+            <section class="ai-section">
+                <div class="ai-header">
+                    <h2><i class="fas fa-robot"></i> Your AI Companion</h2>
+                    <div class="ai-selector">
+                        <button class="ai-btn active" data-ai="guide">Guide Bot</button>
+                        <button class="ai-btn" data-ai="companion">Skill Companion</button>
+                    </div>
+                </div>
+                
+                <div class="ai-chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai-message">
+                            <strong>Guide Bot:</strong> Hello Alex! Welcome to EDUSENSE. I'm your AI companion designed to help you build better study habits. How can I assist you today?
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Type your message here...">
+                        <button class="voice-btn" id="voiceBtn"><i class="fas fa-microphone"></i></button>
+                        <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Challenges Card -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tasks"></i> Active Challenges</h3>
+                        <button class="add-btn" id="addChallengeBtn">+ New</button>
+                    </div>
+                    <div class="challenges-list">
+                        <div class="challenge-item">
+                            <i class="fas fa-book" style="color: var(--primary-purple); font-size: 1.5rem; margin-right: 15px;"></i>
+                            <div style="flex: 1;">
+                                <h4>Study 2 Hours Daily</h4>
+                                <p style="color: var(--text-gray); font-size: 0.9rem;">15/30 days completed</p>
+                                <div style="background: rgba(255,255,255,0.1); height: 5px; border-radius: 5px; margin-top: 8px;">
+                                    <div style="width: 50%; background: linear-gradient(90deg, var(--primary-purple), var(--accent-blue)); height: 100%; border-radius: 5px;"></div>
+                                </div>
+                            </div>
+                            <div style="background: var(--success-green); color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">
+                                +50 XP
+                            </div>
+                        </div>
+                        
+                        <div class="challenge-item">
+                            <i class="fas fa-dumbbell" style="color: var(--accent-blue); font-size: 1.5rem; margin-right: 15px;"></i>
+                            <div style="flex: 1;">
+                                <h4>Morning Exercise</h4>
+                                <p style="color: var(--text-gray); font-size: 0.9rem;">8/20 days completed</p>
+                                <div style="background: rgba(255,255,255,0.1); height: 5px; border-radius: 5px; margin-top: 8px;">
+                                    <div style="width: 40%; background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink)); height: 100%; border-radius: 5px;"></div>
+                                </div>
+                            </div>
+                            <div style="background: var(--success-green); color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">
+                                +30 XP
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Card -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Your Stats</h3>
+                    </div>
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-value">15</div>
+                            <div>Current Level</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">7</div>
+                            <div>Badges Earned</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3</div>
+                            <div>Friends</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">#245</div>
+                            <div>Global Rank</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <p style="color: var(--text-gray); margin-bottom: 5px;">Progress to Level 16</p>
+                        <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px;">
+                            <div style="width: 45%; background: linear-gradient(90deg, var(--primary-purple), var(--accent-pink)); height: 100%; border-radius: 5px;"></div>
+                        </div>
+                        <p style="text-align: right; color: var(--text-gray); margin-top: 5px;">2,450 / 5,000 XP</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFILE PAGE -->
+        <div class="page" id="profile">
+            <div class="page-header">
+                <h2><i class="fas fa-user"></i> Your Profile</h2>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div style="text-align: center;">
+                        <div class="user-avatar" style="width: 100px; height: 100px; font-size: 2.5rem; margin: 0 auto 20px;">
+                            AJ
+                        </div>
+                        <h3>Alex Johnson</h3>
+                        <p style="color: var(--text-gray);">@StudyWarrior</p>
+                        <p style="color: var(--success-green); margin: 10px 0;">Level 15 • Silver League</p>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <h4><i class="fas fa-trophy" style="color: var(--warning-orange);"></i> Achievements</h4>
+                        <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: var(--primary-purple);">42</div>
+                                <div style="color: var(--text-gray);">Challenges</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: var(--primary-purple);">7</div>
+                                <div style="color: var(--text-gray);">Badges</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: var(--primary-purple);">15</div>
+                                <div style="color: var(--text-gray);">Level</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                    <div style="margin-top: 20px;">
+                        <div style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <p>Completed "Study 2 Hours" challenge</p>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">Today • +50 XP</p>
+                        </div>
+                        <div style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <p>Earned "Team Player" badge</p>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">Yesterday</p>
+                        </div>
+                        <div style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <p>Leveled up to 15</p>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">3 days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCOREBOARD PAGE -->
+        <div class="page" id="scoreboard">
+            <div class="page-header">
+                <h2><i class="fas fa-trophy"></i> Scoreboard</h2>
+            </div>
+            
+            <div class="dashboard-card">
+                <div style="margin-bottom: 20px;">
+                    <button style="background: var(--primary-purple); color: white; border: none; padding: 8px 15px; border-radius: 5px; margin-right: 10px;">Global</button>
+                    <button style="background: rgba(255,255,255,0.1); color: white; border: none; padding: 8px 15px; border-radius: 5px; margin-right: 10px;">Country</button>
+                    <button style="background: rgba(255,255,255,0.1); color: white; border: none; padding: 8px 15px; border-radius: 5px;">Friends</button>
+                </div>
+                
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: rgba(138, 43, 226, 0.2);">
+                                <th style="padding: 15px; text-align: left;">Rank</th>
+                                <th style="padding: 15px; text-align: left;">Player</th>
+                                <th style="padding: 15px; text-align: left;">Level</th>
+                                <th style="padding: 15px; text-align: left;">XP</th>
+                                <th style="padding: 15px; text-align: left;">Badges</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 15px; color: gold; font-weight: bold;">#1</td>
+                                <td style="padding: 15px;">
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <div style="width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(45deg, gold, orange);"></div>
+                                        <span>@StudyMaster</span>
+                                    </div>
+                                </td>
+                                <td style="padding: 15px;">28</td>
+                                <td style="padding: 15px;">12,450</td>
+                                <td style="padding: 15px;">19</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 15px; color: silver; font-weight: bold;">#2</td>
+                                <td style="padding: 15px;">
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <div style="width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(45deg, silver, gray);"></div>
+                                        <span>@BookWorm</span>
+                                    </div>
+                                </td>
+                                <td style="padding: 15px;">25</td>
+                                <td style="padding: 15px;">10,200</td>
+                                <td style="padding: 15px;">16</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(138, 43, 226, 0.1);">
+                                <td style="padding: 15px; color: #CD7F32; font-weight: bold;">#245</td>
+                                <td style="padding: 15px;">
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <div style="width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(45deg, var(--primary-purple), var(--accent-blue));"></div>
+                                        <span>@StudyWarrior (You)</span>
+                                    </div>
+                                </td>
+                                <td style="padding: 15px;">15</td>
+                                <td style="padding: 15px;">2,450</td>
+                                <td style="padding: 15px;">7</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- BADGES PAGE -->
+        <div class="page" id="badges">
+            <div class="page-header">
+                <h2><i class="fas fa-shield-alt"></i> Badges Collection</h2>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Your Badges</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin-top: 20px;">
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(45deg, gold, orange); margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>Study Streak</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(45deg, silver, gray); margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <p>Team Player</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(45deg, #CD7F32, #8B4513); margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <p>Quick Starter</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>Mystery Badges</h3>
+                    <p style="color: var(--text-gray); margin-top: 10px;">Complete special challenges to unlock these!</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin-top: 20px;">
+                        <div style="text-align: center; opacity: 0.7;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(45deg, #333, #000); margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <p>???</p>
+                        </div>
+                        <div style="text-align: center; opacity: 0.7;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(45deg, #333, #000); margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <p>???</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FRIENDS PAGE -->
+        <div class="page" id="friends">
+            <div class="page-header">
+                <h2><i class="fas fa-users"></i> Friends</h2>
+            </div>
+            
+            <div class="dashboard-card">
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <input type="text" placeholder="Search by player tag..." style="flex: 1; padding: 10px; background: rgba(255,255,255,0.1); border: 1px solid var(--primary-purple); border-radius: 5px; color: white;">
+                    <button style="background: var(--primary-purple); color: white; border: none; padding: 10px 15px; border-radius: 5px;">Search</button>
+                </div>
+                
+                <h3>Your Friends (3)</h3>
+                <div class="friends-list" style="margin-top: 20px;">
+                    <div class="friend-item">
+                        <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, pink, hotpink);"></div>
+                            <div>
+                                <h4>Emma</h4>
+                                <p style="color: var(--success-green); font-size: 0.9rem;">Online</p>
+                            </div>
+                        </div>
+                        <button style="background: var(--accent-blue); color: white; border: none; padding: 8px 15px; border-radius: 5px;">Invite</button>
+                    </div>
+                    
+                    <div class="friend-item">
+                        <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, lightblue, blue);"></div>
+                            <div>
+                                <h4>Mike</h4>
+                                <p style="color: var(--warning-orange); font-size: 0.9rem;">Away</p>
+                            </div>
+                        </div>
+                        <button style="background: var(--accent-blue); color: white; border: none; padding: 8px 15px; border-radius: 5px;">Invite</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLLABORATION PAGE -->
+        <div class="page" id="collaboration">
+            <div class="page-header">
+                <h2><i class="fas fa-handshake"></i> Collaboration</h2>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Active Group Challenges</h3>
+                    <div style="margin-top: 20px;">
+                        <div style="padding: 15px; background: rgba(65, 105, 225, 0.1); border-radius: 10px; margin-bottom: 15px;">
+                            <h4>Group Study Marathon</h4>
+                            <p style="color: var(--text-gray); margin: 10px 0;">With Emma and Mike • 3/5 sessions completed</p>
+                            <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 5px;">
+                                <div style="width: 60%; background: linear-gradient(90deg, var(--accent-blue), var(--primary-purple)); height: 100%; border-radius: 5px;"></div>
+                            </div>
+                            <p style="text-align: right; margin-top: 10px; color: var(--success-green); font-weight: bold;">+100 XP (20% bonus)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>Create New Group Challenge</h3>
+                    <div style="margin-top: 20px;">
+                        <input type="text" placeholder="Challenge Name" style="width: 100%; padding: 10px; margin-bottom: 15px; background: rgba(255,255,255,0.1); border: 1px solid var(--primary-purple); border-radius: 5px; color: white;">
+                        <textarea placeholder="Description" style="width: 100%; padding: 10px; margin-bottom: 15px; background: rgba(255,255,255,0.1); border: 1px solid var(--primary-purple); border-radius: 5px; color: white; height: 100px;"></textarea>
+                        <button style="width: 100%; padding: 12px; background: linear-gradient(45deg, var(--primary-purple), var(--accent-blue)); border: none; border-radius: 5px; color: white; font-weight: bold;">Create Challenge</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPETITIVE PAGE -->
+        <div class="page" id="competitive">
+            <div class="page-header">
+                <h2><i class="fas fa-gamepad"></i> Competitive Arena</h2>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card" style="text-align: center;">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(45deg, var(--primary-purple), var(--accent-blue)); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Time Challenge</h3>
+                    <p style="color: var(--text-gray); margin: 15px 0;">Complete tasks against the clock</p>
+                    <button style="background: linear-gradient(45deg, var(--primary-purple), var(--accent-blue)); color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold;">Join (100 XP)</button>
+                </div>
+                
+                <div class="dashboard-card" style="text-align: center;">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(45deg, var(--accent-pink), var(--primary-purple)); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Team Battle</h3>
+                    <p style="color: var(--text-gray); margin: 15px 0;">Compete with friends for rewards</p>
+                    <button style="background: linear-gradient(45deg, var(--accent-pink), var(--primary-purple)); color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold;">Join (150 XP)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- LEAGUE SYSTEM PAGE -->
+        <div class="page" id="league">
+            <div class="page-header">
+                <h2><i class="fas fa-chess-knight"></i> League System</h2>
+            </div>
+            
+            <div class="dashboard-card">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(45deg, silver, gray); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Silver League</h3>
+                    <p style="color: var(--text-gray);">Rank: #245 • 1,550 XP to Gold League</p>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.5rem; color: #CD7F32;">Bronze</div>
+                        <div style="font-size: 0.9rem; color: var(--text-gray);">Levels 1-10</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.5rem; color: silver; font-weight: bold;">Silver</div>
+                        <div style="font-size: 0.9rem; color: var(--text-gray);">Levels 11-20</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.5rem; color: gold;">Gold</div>
+                        <div style="font-size: 0.9rem; color: var(--text-gray);">Levels 21-30</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIL PAGE -->
+        <div class="page" id="mail">
+            <div class="page-header">
+                <h2><i class="fas fa-envelope"></i> Mail & Notifications</h2>
+            </div>
+            
+            <div class="dashboard-card">
+                <h3>Unread (5)</h3>
+                <div style="margin-top: 20px;">
+                    <div style="padding: 15px; background: rgba(138, 43, 226, 0.1); border-radius: 10px; margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4>Friend Request from @StudyBuddy</h4>
+                            <span style="color: var(--text-gray); font-size: 0.9rem;">Today</span>
+                        </div>
+                        <p style="color: var(--text-gray); margin: 10px 0;">Wants to connect and collaborate on challenges</p>
+                        <div style="display: flex; gap: 10px;">
+                            <button style="background: var(--success-green); color: white; border: none; padding: 8px 15px; border-radius: 5px;">Accept</button>
+                            <button style="background: rgba(255,255,255,0.1); color: white; border: none; padding: 8px 15px; border-radius: 5px;">Decline</button>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 15px; background: rgba(50, 205, 50, 0.1); border-radius: 10px; margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4>Challenge Completed!</h4>
+                            <span style="color: var(--text-gray); font-size: 0.9rem;">Yesterday</span>
+                        </div>
+                        <p style="color: var(--text-gray); margin: 10px 0;">"Morning Exercise" challenge completed • +30 XP earned</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HELP PAGE -->
+        <div class="page" id="help">
+            <div class="page-header">
+                <h2><i class="fas fa-question-circle"></i> Help & Support</h2>
+            </div>
+            
+            <div class="dashboard-card">
+                <h3>AI Companion Guide</h3>
+                <div style="margin-top: 20px;">
+                    <div style="padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px; margin-bottom: 15px;">
+                        <h4><i class="fas fa-robot" style="color: var(--primary-purple);"></i> Using the AI Companion</h4>
+                        <p style="color: var(--text-gray); margin: 10px 0;">Our AI companions are designed to help you with habit building. The Guide Bot helps you navigate the platform, while the Skill Companion helps with study techniques and motivation.</p>
+                    </div>
+                    
+                    <div style="padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px; margin-bottom: 15px;">
+                        <h4><i class="fas fa-universal-access" style="color: var(--accent-blue);"></i> ADHD/Dyslexia Features</h4>
+                        <p style="color: var(--text-gray); margin: 10px 0;">EDUSENSE includes: Voice interaction, simplified navigation, focus timers, color-coded tasks, text-to-speech support, and gamified rewards to maintain engagement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT US PAGE -->
+        <div class="page" id="about">
+            <div class="page-header">
+                <h2><i class="fas fa-info-circle"></i> About EDUSENSE</h2>
+            </div>
+            
+            <div class="dashboard-card">
+                <h3>Our Mission</h3>
+                <p style="color: var(--text-gray); margin: 15px 0; line-height: 1.6;">
+                    EDUSENSE is designed to help college students, especially those with ADHD and dyslexia, build better study habits through gamification and AI companionship. 
+                    We combine habit tracking with social features and intelligent AI support to make learning more accessible and engaging for everyone.
+                </p>
+                
+                <h3 style="margin-top: 30px;">Features</h3>
+                <ul style="color: var(--text-gray); margin: 15px 0; padding-left: 20px; line-height: 1.8;">
+                    <li>AI Learning Companions with voice interaction</li>
+                    <li>Gamified habit tracking with levels and badges</li>
+                    <li>Social features for collaboration and competition</li>
+                    <li>ADHD/dyslexia-friendly design</li>
+                    <li>Personalized challenges and progress tracking</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div class="modal active" id="loginModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeLogin">&times;</button>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(45deg, var(--primary-purple), var(--accent-blue)); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h2>Welcome to EDUSENSE</h2>
+                <p style="color: var(--text-gray);">Your AI Learning Companion</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email or Player Tag</label>
+                    <input type="text" placeholder="@StudyWarrior or email@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password">
+                </div>
+                
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 20px; color: var(--text-gray);">
+                Don't have an account? <a href="#" style="color: var(--accent-blue);" id="showSignup">Sign up here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeSignup">&times;</button>
+            <h2>Create Account</h2>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Join EDUSENSE and start your learning journey</p>
+            
+            <form id="signupForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Alex Johnson">
+                </div>
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="student@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>Choose Player Tag</label>
+                    <input type="text" placeholder="@StudyWarrior">
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Create a strong password">
+                </div>
+                
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 20px; color: var(--text-gray);">
+                Already have an account? <a href="#" style="color: var(--accent-blue);" id="showLogin">Login here</a>
+            </p>
+        </div>
+    </div>
+
+       <!-- New Challenge Modal -->
+   <div class="modal" id="newChallengeModal">
+       <div class="modal-content">
+           <button class="close-modal" id="closeNewChallenge">&times;</button>
+           <h2>Create New Challenge</h2>
+           <form id="newChallengeForm">
+               <div class="form-group">
+                   <label>Challenge Name</label>
+                   <input type="text" id="challengeName" placeholder="e.g., Study 2 hours daily" required>
+               </div>
+               
+               <div class="form-group">
+                   <label>Description</label>
+                   <textarea id="challengeDescription" placeholder="Describe your challenge..." rows="3"></textarea>
+               </div>
+
+               <div class="form-group">
+                   <label>Duration (in days)</label>
+                   <input type="number" id="challengeDuration" min="1" max="365" value="30" required>
+               </div>
+
+               <div class="form-group">
+                   <label>XP Reward</label>
+                   <input type="number" id="challengeXP" min="10" max="1000" value="50" required>
+               </div>
+
+               <button type="submit" class="submit-btn">Create Challenge</button>
+           </form>
+       </div>
+   </div>
+
+
+<script src="scripts.js"></script>
+<script>
+    // ==================== NAVIGATION & LOGIN LOGIC ====================
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Navigation Logic ---
+        const links = document.querySelectorAll('.menu-items a');
+        const pages = document.querySelectorAll('.page');
+        const sidebar = document.getElementById('sidebar');
+        const hamburger = document.getElementById('hamburgerMenu');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        // Handle Sidebar Toggle
+        if(hamburger) {
+            hamburger.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            });
+        }
+
+        // Close sidebar when overlay clicked
+        if(overlay) {
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        }
+
+        // Handle Page Switching
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all pages and links
+                const targetId = link.getAttribute('data-page');
+                if(!targetId) return; // Ignore logout or non-page links
+
+                pages.forEach(page => page.classList.remove('active'));
+                
+                // Show target page
+                const targetPage = document.getElementById(targetId);
+                if(targetPage) targetPage.classList.add('active');
+
+                // Close sidebar on mobile after click
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+
+        // --- LOGIN LOGIC (THE FIX) ---
+        const loginForm = document.getElementById('loginForm');
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const showSignupBtn = document.getElementById('showSignup');
+        const showLoginBtn = document.getElementById('showLogin');
+
+        // Toggle between Login and Signup modals
+        if(showSignupBtn) {
+            showSignupBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.classList.remove('active');
+                signupModal.classList.add('active');
+            });
+        }
+
+        if(showLoginBtn) {
+            showLoginBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                signupModal.classList.remove('active');
+                loginModal.classList.add('active');
+            });
+        }
+
+        // HANDLE LOGIN SUBMISSION
+        if(loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Stop page reload
+                
+                // 1. Hide the Modal
+                loginModal.classList.remove('active');
+                
+                // 2. Ensure Home page is active
+                pages.forEach(page => page.classList.remove('active'));
+                document.getElementById('home').classList.add('active');
+
+                // 3. Initialize AI Voice and Greet
+                initSpeechSynthesis();
+                
+                // Wait a moment for the UI to settle, then speak
+                setTimeout(() => {
+                    const greeting = "Welcome back, Alex! I am ready to help you study.";
+                    addMessageToChat(greeting, 'ai'); // Add text to chat
+                    speakText(greeting); // Speak it out loud
+                }, 500);
+            });
+        }
+    });
+
+    // ==================== AI & CHAT LOGIC ====================
+
+    let autoSpeak = false;
+    let selectedVoice = null;
+    let availableVoices = [];
+    const currentAI = 'guide'; // Default AI
+
+    // Initialize Speech Synthesis
+    function initSpeechSynthesis() {
+        if ('speechSynthesis' in window) {
+            availableVoices = window.speechSynthesis.getVoices();
+            window.speechSynthesis.onvoiceschanged = () => {
+                availableVoices = window.speechSynthesis.getVoices();
+            };
+        }
+    }
+
+    function speakText(text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel(); // Stop previous speech
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 1;
+            utterance.pitch = 1;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function addMessageToChat(text, sender) {
+        const chatContainer = document.getElementById('chatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+        messageDiv.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
+        
+        // Add styling for user message vs ai message
+        if(sender === 'user') {
+            messageDiv.style.textAlign = 'right';
+            messageDiv.style.background = 'rgba(138, 43, 226, 0.2)';
+            messageDiv.style.padding = '10px';
+            messageDiv.style.borderRadius = '10px';
+            messageDiv.style.marginBottom = '10px';
+            messageDiv.innerHTML = `<strong>You:</strong> ${text}`;
+        } else {
+            messageDiv.style.textAlign = 'left';
+            messageDiv.style.background = 'rgba(255, 255, 255, 0.05)';
+            messageDiv.style.padding = '10px';
+            messageDiv.style.borderRadius = '10px';
+            messageDiv.style.marginBottom = '10px';
+            messageDiv.innerHTML = `<strong>Guide Bot:</strong> ${text}`;
+        }
+
+        chatContainer.appendChild(messageDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to bottom
+    }
+
+    // Handle Chat Input
+    const sendBtn = document.getElementById('sendBtn');
+    const userInput = document.getElementById('userInput');
+
+    function sendMessage() {
+        const text = userInput.value.trim();
+        if (text) {
+            // 1. Add User Message
+            addMessageToChat(text, 'user');
+            userInput.value = '';
+
+            // 2. Simulate AI Response
+            setTimeout(() => {
+                const response = "I'm your AI companion. I can help you organize your tasks!";
+                addMessageToChat(response, 'ai');
+                if(autoSpeak) speakText(response);
+            }, 1000);
+        }
+    }
+
+    if(sendBtn) {
+        sendBtn.addEventListener('click', sendMessage);
+    }
+    
+    if(userInput) {
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    }
+
+</script></body>
+</html>
